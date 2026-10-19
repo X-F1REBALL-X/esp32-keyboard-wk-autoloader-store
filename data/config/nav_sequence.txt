@@ -1,0 +1,14 @@
+# AutoStore USB HID keyboard sequence (SoftAP SSID AutoStore)
+# Format: <delay_seconds> <KEY>
+# delay = wait AFTER the previous key before sending this one
+#
+# Default: open the PS Store tile on the home content row.
+# The board only presses keys. It does not rewrite the Store tile.
+# Point Store at your own jailbreak host on the console before use.
+#
+# After console detect, focus is one slot right of Store.
+# One LEFT, then Enter.
+# Tune delays on your console, then re-upload LittleFS.
+
+0.3 LEFT
+0.3 ENTER

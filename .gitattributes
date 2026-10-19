@@ -1,0 +1,20 @@
+# GitHub language bar: C++ (firmware) only.
+
+# Binaries and generated embeds
+**/*.elf linguist-generated
+**/*.gz linguist-generated
+**/*.bin linguist-generated
+
+# Not project languages for Linguist
+**/*.html linguist-detectable=false
+**/*.css linguist-detectable=false
+**/*.py linguist-detectable=false
+**/*.sh linguist-detectable=false
+**/*.ps1 linguist-detectable=false
+Makefile linguist-detectable=false
+**/Makefile linguist-detectable=false
+**/*.md linguist-detectable=false
+**/*.csv linguist-detectable=false
+**/*.ini linguist-detectable=false
+**/*.txt linguist-detectable=false
+**/*.json linguist-detectable=false

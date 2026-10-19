@@ -1,0 +1,7 @@
+{
+  "mode": "home",
+  "sta_ssid": "YOUR_HOME_SSID",
+  "sta_pass": "YOUR_HOME_PASSWORD",
+  "console_ip": "",
+  "softap": true
+}
