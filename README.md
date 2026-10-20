@@ -1,5 +1,9 @@
 # ESP32-S3 PS5 AutoStore
 
+<p align="center">
+  <img src="docs/board.jpg" alt="ESP32-S3 N16R8 board" width="420">
+</p>
+
 USB HID board for PS5. Version `1.0.0`.
 
 On every boot the board waits for the console, then sends LEFT and ENTER to
