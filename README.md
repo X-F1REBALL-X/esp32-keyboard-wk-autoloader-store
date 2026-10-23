@@ -13,6 +13,8 @@ Firmware that turns an ESP32-S3 or ESP32-S2 Mini into a USB keyboard that opens 
 2. Flash it at address `0x0` with the [Espressif web flasher](https://espressif.github.io/esptool-js/).
 3. Plug the board into the PS5 and restart the console.
 
+Everything else is in the [guide](https://x-f1reball-x.github.io/esp32-keyboard-wk-autoloader-store/guide/).
+
 ## Contents
 
 - [Features](#features)
