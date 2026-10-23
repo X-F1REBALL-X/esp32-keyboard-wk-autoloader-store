@@ -24,38 +24,44 @@ sends no payloads.
 - A 2.4 GHz home Wi-Fi network; the PS5 on the same LAN (Wi-Fi or Ethernet)
 - Automatic login on the PS5 is recommended for hands-free boots
 
-## Flashing the release image
+## Quick start (no tools needed)
 
-Download `ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.0.bin` from the Releases
-page. It is a merged 16 MB image and is flashed at address `0x0`. Connect the
-board's **UART / COM** port to the PC.
+1. Download the flash file from the
+   [v1.0.0 release](https://github.com/X-F1REBALL-X/esp32s3-keyboard-wk-autoloader-store/releases/tag/v1.0.0):
+   `ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.0.bin`
 
-**esptool (any OS):**
+2. Flash it in Chrome or Edge with the
+   [Espressif web flasher](https://espressif.github.io/esptool-js/):
+   - Connect the board **UART / COM** port to the PC (not native USB).
+   - Open the flasher, click **Connect**, choose the COM port, baud 921600.
+     Lines like `Detecting chip type... ESP32-S3` and `Stub running` are normal.
+   - Add the file at flash address `0x0`.
+   - Click **Program**. It takes about 1 minute. Success looks like
+     `Hash of data verified.` then `Leaving... Hard resetting via RTS pin...`.
 
-```bash
-esptool.py --chip esp32s3 --port PORT --baud 921600 write_flash 0x0 ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.0.bin
-```
+3. Move the cable from the **UART / COM** port to the **native USB** port and
+   plug that port into the PS5. Do not use the UART / COM port on the console.
 
-**ESP Flash Download Tool (Windows):**
+4. Set up Wi-Fi from your phone or computer (not from the PS5):
+   - Join the Wi-Fi network `AutoStore` (password `12345678`) and wait until it connects.
+   - Open http://10.1.1.1 in the browser (http, not https). Many phones open it
+     automatically. If the phone says there is no internet, choose
+     *Stay connected* / *Use network anyway*.
+   - Enter your home Wi-Fi name and password and save. Console IP and board IP
+     are optional; leave them blank for auto-detect and DHCP.
+   - The board reboots and joins your home network.
 
-1. Chip type `ESP32-S3`, work mode `Develop`, load mode `UART`.
-2. Add the `.bin` file, tick it, set the address to `0x0`.
-3. Select the COM port, baud 921600, SPI mode DIO, then click START.
+5. Keep the PS5 on your home network (Ethernet or home Wi-Fi). Do not connect the
+   PS5 to `AutoStore`. On the next console boot the board opens WK Autoloader Store.
 
-After flashing, move the cable to the **native USB** port and plug it into the PS5.
+You can return to http://10.1.1.1 at any time to change settings.
 
-## First setup
+## Flashing with esptool (advanced)
 
-1. On a phone or computer, join the Wi-Fi network `AutoStore`
-   (the password is set in `include/config.h`).
-2. Open http://10.1.1.1 (use http, not https). Many devices open it
-   automatically as a captive portal.
-3. Enter your home Wi-Fi name and password and save. Console IP and board IP
-   are optional; leave them blank for auto-detect and DHCP.
-4. The board reboots and joins your network.
+    esptool.py --chip esp32s3 --port PORT --baud 921600 write_flash 0x0 ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.0.bin
 
-Do not connect the PS5 itself to `AutoStore`. The access point stays available,
-so you can return to http://10.1.1.1 to change settings.
+On Windows you can also use ESP Flash Download Tool: chip `ESP32-S3`, add the
+file at `0x0`, SPI mode DIO, baud 921600, then START.
 
 ## How the key sequence works
 
