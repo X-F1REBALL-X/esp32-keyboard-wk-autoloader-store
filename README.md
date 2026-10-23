@@ -56,6 +56,8 @@ sends no payloads.
 
 You can return to http://10.1.1.1 at any time to change settings.
 
+The board joins your home Wi-Fi like any other device. Your internet and the PS5 network keep working as usual.
+
 ## Flashing with esptool (advanced)
 
     esptool.py --chip esp32s3 --port PORT --baud 921600 write_flash 0x0 ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.0.bin
