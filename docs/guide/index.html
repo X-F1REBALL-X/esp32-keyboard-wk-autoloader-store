@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ESP32 Keyboard for WK Autoloader Store guide</title>
+<meta name="description" content="Firmware that turns an ESP32-S3 or ESP32-S2 Mini into a USB keyboard that opens WK Autoloader Store on every PS5 boot."/>
+<style>
+:root{--bg:#060b1a;--card:#0e1630;--edge:#1f2c52;--ink:#e6edff;--mute:#8a9acb;--pri:#ff8a3d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:16px/1.6 "Inter","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--pri)}
+.in{max-width:980px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--edge);padding:16px 0;position:sticky;top:0;background:rgba(6,11,26,.92);backdrop-filter:blur(6px);z-index:2}
+header .in{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.name{font-size:1.3rem;font-weight:800}
+.ver{color:var(--mute);font-size:.9rem}
+nav{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.95rem}
+.banner{display:block;width:100%;border-radius:16px;border:1px solid var(--edge);margin:28px 0 8px}
+section{padding:40px 0;border-bottom:1px solid var(--edge)}
+h1{font-size:2rem;line-height:1.25;margin-bottom:12px}
+h2{font-size:1.5rem;margin-bottom:14px}
+h3{font-size:1.1rem;margin:18px 0 8px}
+p{color:var(--mute);margin-bottom:12px}
+.btn{display:inline-block;margin:8px 10px 0 0;padding:10px 18px;border-radius:999px;border:1px solid var(--edge);color:var(--ink);text-decoration:none;font-weight:700}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:#04122b}
+ol,ul{margin-left:22px}
+li{margin:8px 0;color:var(--mute)}
+li b,p b,td b{color:var(--ink)}
+code{background:var(--card);border:1px solid var(--edge);border-radius:6px;padding:1px 6px;color:var(--ink);font-size:.9em;word-break:break-word}
+pre{background:var(--card);border:1px solid var(--edge);border-radius:10px;padding:14px;overflow:auto;margin:10px 0 14px}
+pre code{border:0;padding:0;background:none}
+.card{background:var(--card);border:1px solid var(--edge);border-radius:14px;padding:18px 20px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0 14px;font-size:.95rem}
+th,td{border:1px solid var(--edge);padding:8px 10px;text-align:left;color:var(--mute);vertical-align:top}
+th{background:var(--card);color:var(--ink)}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+figure img{width:100%;border-radius:12px;border:1px solid var(--edge)}
+figcaption{color:var(--mute);margin-top:6px;text-align:center;font-size:.9rem}
+footer{padding:28px 0;color:var(--mute)}
+</style>
+</head>
+<body>
+<header><div class="in">
+<div><div class="name">ESP32 Keyboard for WK Autoloader Store</div><div class="ver">v1.0.1</div></div>
+<nav><a href="#what">What it does</a><a href="#req">Requirements</a><a href="#install">Install</a><a href="#keys">Key sequence</a><a href="#help">Troubleshooting</a></nav>
+</div></header>
+<div class="in"><img class="banner" src="../img/banner.png" alt="ESP32 Keyboard for WK Autoloader Store"/></div>
+<section><div class="in">
+<h1>Open WK Autoloader Store on every PS5 boot.</h1><p>Firmware that turns an ESP32-S3 or ESP32-S2 Mini into a USB keyboard that opens <a href="https://github.com/X-F1REBALL-X/wk-autoloader">WK Autoloader Store</a> on every PS5 boot. The board only sends key presses. It contains no exploit, hosts no pages and sends no payloads.</p>
+<a class="btn pri" href="https://github.com/X-F1REBALL-X/esp32-keyboard-wk-autoloader-store/releases/tag/v1.0.1">Download v1.0.1</a><a class="btn" href="https://github.com/X-F1REBALL-X/esp32-keyboard-wk-autoloader-store">Source on GitHub</a>
+</div></section>
+
+<section id="what"><div class="in">
+<h2>What it does</h2>
+<ul>
+<li>On every boot it waits <b>18.5 seconds</b>, then presses <b>LEFT</b> and <b>ENTER</b> to open the Store tile, which launches WK Autoloader Store.</li>
+<li>The key sequence is a plain text file you can edit.</li>
+<li>Optional Wi-Fi setup page at <code>http://10.1.1.1</code> from the <code>AutoStore</code> network.</li></ul>
+<div class="gal"><figure><img src="../board.jpg" alt="ESP32-S3 N16R8 board"/><figcaption>ESP32-S3 DevKitC-1 N16R8</figcaption></figure>
+<figure><img src="../board-s2-mini.jpg" alt="ESP32-S2 Mini board"/><figcaption>ESP32-S2 Mini</figcaption></figure></div>
+</div></section>
+
+<section id="req"><div class="in">
+<h2>Requirements</h2>
+<ul>
+<li>WK Autoloader Store installed on the PS5 (it replaces the Store tile).</li>
+<li>A 2.4 GHz home Wi-Fi network; the PS5 on the same LAN (Wi-Fi or Ethernet).</li>
+<li>Automatic login on the PS5 is recommended for hands-free boots.</li></ul>
+<table><tr><th>Board</th><th>Flash file</th></tr>
+<tr><td>ESP32-S3 DevKitC-1 <b>N16R8</b> (16 MB flash, 8 MB PSRAM)</td><td><code>ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.1.bin</code></td></tr>
+<tr><td>ESP32-S2 <b>Mini</b> (Wemos/Lolin, 4 MB flash, 2 MB PSRAM)</td><td><code>ESP32S2_Mini_Keyboard_WK_Autoloader_Store_V1.0.1.bin</code></td></tr></table>
+<p>ESP32-S3: the <b>UART / COM port</b> is for flashing and logs, the <b>native USB port</b> goes to the PS5. ESP32-S2 Mini has a single USB-C port used for both.</p>
+</div></section>
+
+<section id="install"><div class="in">
+<h2>Install</h2>
+<ol>
+<li><b>Download</b> the <code>.bin</code> for your board from the <a href="https://github.com/X-F1REBALL-X/esp32-keyboard-wk-autoloader-store/releases/tag/v1.0.1">v1.0.1 release</a>.</li>
+<li><b>Flash</b> it in Chrome or Edge with the <a href="https://espressif.github.io/esptool-js/">Espressif web flasher</a>: connect the board <b>UART / COM</b> port to the PC (not native USB), click <b>Connect</b>, choose the COM port, baud <code>921600</code>, add the file at address <code>0x0</code> and click <b>Program</b>. It takes about 1 minute; success looks like <code>Hash of data verified.</code>
+<div class="card"><b>ESP32-S2 Mini:</b> enter flash mode first: hold <b>0</b>, press and release <b>RST</b>, then release <b>0</b>. Use baud <code>115200</code> and address <code>0x0</code>. After Program finishes, press <b>RST</b>.</div></li>
+<li><b>Plug into the PS5.</b> ESP32-S3: move the cable to the <b>native USB</b> port and plug that port into the PS5 (never the UART / COM port). ESP32-S2 Mini: plug its USB-C port into the PS5.</li>
+<li><b>Set up Wi-Fi</b> from your phone or computer (not from the PS5): join <code>AutoStore</code> (password <code>12345678</code>), open <code>http://10.1.1.1</code> (http, not https), enter your home 2.4 GHz Wi-Fi name and password and save. Console IP and board IP are optional. The board reboots and joins your home network.</li>
+<li><b>Restart the PS5.</b> Keep the PS5 on your home network (do not connect it to <code>AutoStore</code>). On the next console boot the board opens WK Autoloader Store.</li></ol>
+<p>The board runs on a <b>restart or full power-on</b> of the PS5. Waking from rest mode does not trigger it.</p>
+<h3>Flashing with esptool (advanced)</h3>
+<pre><code>esptool.py --chip esp32s3 --port PORT --baud 921600 write_flash 0x0 ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.1.bin</code></pre>
+</div></section>
+
+<section id="keys"><div class="in">
+<h2>Key sequence</h2>
+<p>18.5 seconds after the board gets power it runs <code>data/config/nav_sequence.txt</code> once:</p>
+<pre><code>0.3 LEFT
+0.3 ENTER</code></pre>
+<p>Each line is <code>&lt;delay_seconds&gt; &lt;KEY&gt;</code>; lines starting with <code>#</code> are comments. Supported keys: <code>ENTER</code>, <code>ESC</code>, <code>BACKSPACE</code>, <code>TAB</code>, <code>SPACE</code>, <code>UP</code>, <code>DOWN</code>, <code>LEFT</code>, <code>RIGHT</code>, <code>PAGE_UP</code>, <code>PAGE_DOWN</code>. If your Store tile is elsewhere, edit the file and upload the filesystem again with <code>pio run -t uploadfs</code>.</p>
+</div></section>
+
+<section id="help"><div class="in">
+<h2>Troubleshooting</h2>
+<table><tr><th>Problem</th><th>Fix</th></tr>
+<tr><td>Flasher cannot open the port</td><td>Use the UART/COM port; install the CH343 driver if needed</td></tr>
+<tr><td>Board does not join home Wi-Fi</td><td>Use a 2.4 GHz network; reopen http://10.1.1.1 and save again</td></tr>
+<tr><td>Keys do nothing</td><td>Native USB must be connected to the PS5; tune delays in <code>nav_sequence.txt</code></td></tr>
+<tr><td>Console is never found</td><td>Set the console IP on the setup page</td></tr></table>
+<p>Serial logs: UART/COM port at 115200 baud.</p>
+</div></section>
+
+<footer><div class="in">Developed by <a href="https://github.com/X-F1REBALL-X">X-F1REBALL-X</a>. Source: <a href="https://github.com/X-F1REBALL-X/esp32-keyboard-wk-autoloader-store">github.com/X-F1REBALL-X/esp32-keyboard-wk-autoloader-store</a>.</div></footer>
+</body>
+</html>
