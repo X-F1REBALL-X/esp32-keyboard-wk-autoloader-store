@@ -47,7 +47,7 @@ sends no payloads.
    - Open http://10.1.1.1 in the browser (http, not https). Many phones open it
      automatically. If the phone says there is no internet, choose
      *Stay connected* / *Use network anyway*.
-   - Enter your home Wi-Fi name and password and save. Console IP and board IP
+   - Enter your home Wi-Fi name and password (2.4 GHz network only, not 5 GHz) and save. Console IP and board IP
      are optional; leave them blank for auto-detect and DHCP.
    - The board reboots and joins your home network.
 
