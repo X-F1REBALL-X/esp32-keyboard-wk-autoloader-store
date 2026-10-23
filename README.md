@@ -1,7 +1,8 @@
 # ESP32 Keyboard for WK Autoloader Store
 
 <p align="center">
-  <img src="docs/board.jpg" alt="ESP32-S3 N16R8 board" width="420">
+  <img src="docs/board.jpg" alt="ESP32-S3 N16R8 board" width="380">
+  <img src="docs/board-s2-mini.jpg" alt="ESP32-S2 Mini board" width="380">
 </p>
 
 Firmware that turns an ESP32-S3 or ESP32-S2 Mini into a USB HID keyboard for the PS5. On every
