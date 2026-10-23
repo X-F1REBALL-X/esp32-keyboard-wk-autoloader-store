@@ -12,7 +12,9 @@ static const IPAddress kApSubnet(255, 255, 255, 0);
 // Console OS readiness: either port open means the system is up
 static const uint16_t kPs5PortA = 9295;
 static const uint16_t kPs5PortB = 41800;
-static const uint32_t kMinWaitAfterUsbMs = 15000;
+static const uint32_t kMinWaitAfterUsbMs = 16000;
+// Keys go out this long after power-on, no network wait
+static const uint32_t kFixedKeyDelayMs = 18500;
 static const uint32_t kDetectPollMs = 1000;
 static const uint32_t kDetectTimeoutMs = 180000;
 

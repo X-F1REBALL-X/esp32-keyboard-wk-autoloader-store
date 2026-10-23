@@ -73,6 +73,17 @@ void loop() {
   setupHttpLoop();
   hidKeyboardLoop();
 
+  // Fixed timer: send LEFT + ENTER once, kFixedKeyDelayMs after power-on,
+  // whether or not the console was seen on the network.
+  static bool sKeysSent = false;
+  if (!sKeysSent && millis() >= kFixedKeyDelayMs) {
+    sKeysSent = true;
+    LOG.printf("[main] t=%lus - sending keys\n", (unsigned long)(millis() / 1000));
+    if (navSequencePlay()) LOG.println("[main] keys sent - done");
+    setPhase(Phase::Done);
+  }
+  if (sKeysSent) return;
+
   switch (sPhase) {
   case Phase::Boot:
     setPhase(wifiPortalHomeMode() ? Phase::WaitMinUsb : Phase::SetupOnly);

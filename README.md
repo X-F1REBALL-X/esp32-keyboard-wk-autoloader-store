@@ -5,7 +5,7 @@
 </p>
 
 Firmware that turns an ESP32-S3 into a USB HID keyboard for the PS5. On every
-boot it waits for the console to appear on your network, then presses
+boot it waits 18.5 seconds, then presses
 LEFT and ENTER to open the Store tile, which launches
 [WK Autoloader Store](https://github.com/X-F1REBALL-X/wk-autoloader).
 
@@ -73,9 +73,9 @@ mode** does not trigger it; use Restart or a full shutdown instead.
 
 ## How the key sequence works
 
-After boot the board joins Wi-Fi and looks for the console on the LAN
-(TCP ports 9295 / 41800). Once the console is found and at least 15 seconds
-have passed since boot, it runs `data/config/nav_sequence.txt`:
+18.5 seconds after the board gets power it runs
+`data/config/nav_sequence.txt` once. It does not wait for the network or the
+console, so Wi-Fi setup is optional:
 
 ```
 0.3 LEFT
