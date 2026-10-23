@@ -1,10 +1,10 @@
-# ESP32-S3 Keyboard for WK Autoloader Store
+# ESP32 Keyboard for WK Autoloader Store
 
 <p align="center">
   <img src="docs/board.jpg" alt="ESP32-S3 N16R8 board" width="420">
 </p>
 
-Firmware that turns an ESP32-S3 into a USB HID keyboard for the PS5. On every
+Firmware that turns an ESP32-S3 or ESP32-S2 Mini into a USB HID keyboard for the PS5. On every
 boot it waits 18.5 seconds, then presses
 LEFT and ENTER to open the Store tile, which launches
 [WK Autoloader Store](https://github.com/X-F1REBALL-X/wk-autoloader).
@@ -14,9 +14,13 @@ sends no payloads.
 
 ## Hardware
 
-- ESP32-S3 DevKitC-1 **N16R8** (16 MB flash, 8 MB OPI PSRAM)
-- **UART / COM port:** flashing and serial logs from a PC
-- **Native USB port:** connects to the PS5 (HID keyboard)
+| Board | Flash file |
+|-------|------------|
+| ESP32-S3 DevKitC-1 **N16R8** (16 MB flash, 8 MB PSRAM) | `ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.1.bin` |
+| ESP32-S2 **Mini** (Wemos/Lolin, 4 MB flash, 2 MB PSRAM) | `ESP32S2_Mini_Keyboard_WK_Autoloader_Store_V1.0.1.bin` |
+
+ESP32-S3: the **UART / COM port** is for flashing and logs, the **native USB
+port** goes to the PS5. ESP32-S2 Mini has a single USB-C port used for both.
 
 ## Requirements
 
@@ -27,8 +31,8 @@ sends no payloads.
 ## Quick start (no tools needed)
 
 1. Download the flash file from the
-   [v1.0.0 release](https://github.com/X-F1REBALL-X/esp32s3-keyboard-wk-autoloader-store/releases/tag/v1.0.0):
-   `ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.0.bin`
+   [v1.0.1 release](https://github.com/X-F1REBALL-X/esp32-keyboard-wk-autoloader-store/releases/tag/v1.0.1):
+   the `.bin` for your board (see the table above).
 
 2. Flash it in Chrome or Edge with the
    [Espressif web flasher](https://espressif.github.io/esptool-js/):
@@ -39,8 +43,13 @@ sends no payloads.
    - Click **Program**. It takes about 1 minute. Success looks like
      `Hash of data verified.` then `Leaving... Hard resetting via RTS pin...`.
 
-3. Move the cable from the **UART / COM** port to the **native USB** port and
+   **ESP32-S2 Mini:** enter flash mode first: hold **0**, press and release
+   **RST**, then release **0**. Use baud 115200 and address `0x0`. After
+   Program finishes, press **RST**.
+
+3. ESP32-S3: move the cable from the **UART / COM** port to the **native USB** port and
    plug that port into the PS5. Do not use the UART / COM port on the console.
+   ESP32-S2 Mini: plug its USB-C port into the PS5.
 
 4. Set up Wi-Fi from your phone or computer (not from the PS5):
    - Join the Wi-Fi network `AutoStore` (password `12345678`) and wait until it connects.
@@ -60,7 +69,7 @@ The board joins your home Wi-Fi like any other device. Your internet and the PS5
 
 ## Flashing with esptool (advanced)
 
-    esptool.py --chip esp32s3 --port PORT --baud 921600 write_flash 0x0 ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.0.bin
+    esptool.py --chip esp32s3 --port PORT --baud 921600 write_flash 0x0 ESP32S3_Keyboard_WK_Autoloader_Store_V1.0.1.bin
 
 On Windows you can also use ESP Flash Download Tool: chip `ESP32-S3`, add the
 file at `0x0`, SPI mode DIO, baud 921600, then START.
@@ -95,7 +104,8 @@ filesystem again with `pio run -t uploadfs`.
 Requires [PlatformIO Core](https://platformio.org/).
 
 ```bash
-pio run                                   # build firmware
+pio run -e esp32-s3-n16r8                 # build for ESP32-S3
+pio run -e esp32-s2-mini                  # build for ESP32-S2 Mini
 pio run -t upload   --upload-port PORT    # flash firmware
 pio run -t uploadfs --upload-port PORT    # flash LittleFS (nav_sequence.txt)
 ```
