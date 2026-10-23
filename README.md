@@ -63,6 +63,12 @@ You can return to http://10.1.1.1 at any time to change settings.
 On Windows you can also use ESP Flash Download Tool: chip `ESP32-S3`, add the
 file at `0x0`, SPI mode DIO, baud 921600, then START.
 
+## When it runs
+
+The board is timed for a **restart or a full power-on** of the PS5. It runs once
+each time it powers up together with the console. Waking the PS5 from **rest
+mode** does not trigger it; use Restart or a full shutdown instead.
+
 ## How the key sequence works
 
 After boot the board joins Wi-Fi and looks for the console on the LAN
