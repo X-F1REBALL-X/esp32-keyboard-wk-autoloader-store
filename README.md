@@ -2,11 +2,6 @@
 
 Firmware that turns an ESP32-S3 or ESP32-S2 Mini into a USB keyboard that opens [WK Autoloader Store](https://github.com/X-F1REBALL-X/wk-autoloader) on every PS5 boot.
 
-<p align="center">
-  <img src="docs/board.jpg" alt="ESP32-S3 N16R8 board" width="380">
-  <img src="docs/board-s2-mini.jpg" alt="ESP32-S2 Mini board" width="380">
-</p>
-
 ## Quick start
 
 1. Download the `.bin` for your board from the [v1.0.1 release](https://github.com/X-F1REBALL-X/esp32-keyboard-wk-autoloader-store/releases/tag/v1.0.1).
